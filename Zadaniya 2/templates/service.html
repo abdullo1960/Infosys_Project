@@ -1,0 +1,223 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container-fluid bg-dark px-5 d-none d-lg-block">
+        <div class="row gx-0">
+            <div style="margin-left: 150px;" class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center" style="height: 45px;">
+                    <small class="me-3 text-light"><i class="fa fa-map-marker-alt me-2"></i>123 Street, New York, USA</small>
+                    <small class="me-3 text-light"><i class="fa fa-phone-alt me-2"></i>+012 345 6789</small>
+                    <small class="text-light"><i class="fa fa-envelope-open me-2"></i>info@example.com</small>
+                </div>
+            </div>
+            <div style="margin-left: -150px;" class="col-lg-4 text-center text-lg-end">
+                <div class="d-inline-flex align-items-center" style="height: 45px;">
+                    <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-twitter fw-normal"></i></a>
+                    <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-facebook-f fw-normal"></i></a>
+                    <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-linkedin-in fw-normal"></i></a>
+                    <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-instagram fw-normal"></i></a>
+                    <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle" href=""><i class="fab fa-youtube fw-normal"></i></a>
+                </div>
+            </div>
+            <form style="margin-left: -40px; margin-top: -37px;" action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                <input  name="next" type="hidden" value="{{ redirect_to }}">
+                <select name="language">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                        <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                            {{ language.name_local }} ({{ language.code }})
+                        </option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="Go">
+            </form>
+        </div>
+    </div>
+    <div style="margin-bottom: 20px;" class="header">
+        <div class="menu">
+            <div class="container">
+                <img style="width: 1519px; margin-left: -112px; height: 770px; object-fit: cover;" src="https://www.figma.com/file/CDoK9IWURbONoOUcwFx1eT/image/76a58c7b6b5a03b42ca34c79afe1e0bb46b93d1c" alt="">  
+                <div style="display: flex; margin-left: 100px; margin-top: -780px;" class=" header">
+                    <h2 style="margin-top: 35px;"><i style="color: rgb(255, 255, 255); margin-right: 20px; font-size: 50px;" class="fa-solid fa-user"></i><a style="color: #ffffff; text-decoration: none;" href="home.html">{% blocktrans %}Infosys{% endblocktrans %}</a></h2>
+                    <div style="margin-top: 50px;  margin-left: 300px;" class="nav">
+                        <ul style="display: flex; gap: 20px;">
+                            <li class=""><a href="{% url 'myapp:home' %}" style="text-decoration: none; color: #ffffff; list-style-type: none;">{% blocktrans %}Home{% endblocktrans %}</a></li>
+                            <li class=""><a href="{% url 'myapp:about' %}" style="text-decoration: none; color:#ffffff;">{% blocktrans %}About Us{% endblocktrans %}</a></li>
+                            <li class=""><a href="{% url 'myapp:services' %}" style="text-decoration: none; color: #ffffff;">{% blocktrans %}Services{% endblocktrans %}</a></li>
+                            <li class=""><a href="{% url 'myapp:blog' %}" style="text-decoration: none; color: #ffffff;">{% blocktrans %}Blog{% endblocktrans %}</a></li>
+                            <li class=""><a href="{% url 'myapp:price' %}" style="text-decoration: none; color: #ffffff;">{% blocktrans %}Price{% endblocktrans %}</a></li>
+                            <li class=""><a href="{% url 'myapp:contact' %}" style="text-decoration: none; color: #ffffff;">{% blocktrans %}Contacts{% endblocktrans %}</a></li>
+                            <button style="background: #00A3F7; border: none; padding: 15px; margin-top: -15px; ">{% blocktrans %}Download Pro Version{% endblocktrans %}</button>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 200px;" class="div">
+                <h1 style="color: #fff;">Service</h1>
+                <p style="color: #fff; margin-right: 70px;">Home </p> <p style="color: #fff; margin-top: -40px;">O</p> <p style="color: #00A3F7; margin-left: 90px; margin-top: -40px;">Service</p>
+            </div>
+        </div>
+    </div>
+    <div class="services">
+        <p style="color: #00A3F7; text-align: center; margin-top: 500px;">{% blocktrans %}OUR SERVICES{% endblocktrans %}</p>
+        <h1 style="text-align: center;">{% blocktrans %}Custom IT Solutions for Your <br>
+            Successful Business{% endblocktrans %}</h1>
+            <div style="display: flex; gap: 50px; border-radius: 20px; margin-left: 30px; margin-top: 50px;" class="cardsss">
+                <div style="text-align: center; background: #EAF9FF; width: 452.29px; height: 301.9px; border-radius: 20px;" class="card1">
+                    <p style="color: #EAF9FF;">hello</p>
+                    <i style="font-size: 50px; background: #00A3F7; width: 68.47px; padding: 10px; " class="fa fa-shield-alt text-white"></i>
+                    <h3 style="margin-top: 50px;">{% blocktrans %}Cyber Security{% endblocktrans %}</h3>
+                    <p>{% blocktrans %}Cybersecurity refers to the practice of protecting <br> computer systems, networks, and digital data from theft, <br> damage, or unauthorized access.{% endblocktrans %}</p>
+                </div>
+                <div style="text-align: center; background: #EAF9FF; width: 452.29px; height: 301.9px;border-radius: 20px;" class="card2">
+                    <p style="color: #EAF9FF;">hello</p>
+                    <i style="font-size: 50px; background: #00A3F7; width: 68.47px; padding: 10px; " class="fa fa-chart-pie text-white"></i>
+                    <h3 style="margin-top: 50px;">{% blocktrans %}Data Analytics{% endblocktrans %}</h3>
+                    <p>{% blocktrans %}Data analytics is the process of examining, cleaning, <br> transforming, and interpreting data to discover <br> meaningful insights, patterns, and trends.{% endblocktrans %}</p>
+                </div>
+                <div style="text-align: center; background: #EAF9FF; width: 452.29px; height: 301.9px;border-radius: 20px;" class="card3">
+                    <p style="color: #EAF9FF;">hello</p>
+                    <i style="font-size: 50px; background: #00A3F7; width: 72.47px; padding: 8px; " class="fa fa-code  text-white"></i>
+                    <h3 style="margin-top: 50px;">{% blocktrans %}Web Development{% endblocktrans %}</h3>
+                    <p>{% blocktrans %}Web development is the process of creating and <br> maintaining websites or web applications for the <br> internet. It involves a combination of skills and <br> technologies to design, build, and manage websites.{% endblocktrans %}</p>
+                </div>
+            </div>
+            <div style="display: flex; gap: 50px; border-radius: 20px; margin-left: 30px; margin-top: 50px;" class="cardsss1">
+                <div style="text-align: center; background: #EAF9FF; width: 452.29px; height: 301.9px; border-radius: 20px;" class="card1">
+                    <p style="color: #EAF9FF;">hello</p>
+                    <i style="font-size: 50px; background: #00A3F7; width: 68.47px; padding: 10px; " class="fa fa-shield-alt text-white"></i>
+                    <h3 style="margin-top: 20px;">{% blocktrans %}App Development{% endblocktrans %}</h3>
+                    <p>{% blocktrans %}App development refers to the process of creating <br> software applications, often designed to run on mobile <br> devices like smartphones and tablets, but it can also <br> refer to applications for desktop computers or <br> web-based platforms.{% endblocktrans %}</p>
+                </div>
+                <div style="text-align: center; background: #EAF9FF; width: 452.29px; height: 301.9px;border-radius: 20px;" class="card2">
+                    <p style="color: #EAF9FF;">hello</p>
+                    <i style="font-size: 50px; background: #00A3F7; width: 68.47px; padding: 10px; " class="fa fa-search  text-white"></i>
+                    <h3 style="margin-top: 50px;">{% blocktrans %}SEO Optimization{% endblocktrans %}</h3>
+                    <p>{% blocktrans %}SEO (Search Engine Optimization) is the process of <br> improving the visibility and ranking of a website or web <br> page in search engine results. This is done to increase <br> organic (non-paid) traffic to a website.{% endblocktrans %}</p>
+                </div>
+                <div style="text-align: center; background: #00A3F7; width: 452.29px; height: 301.9px;" class="card3">
+                    <h3 style="margin-top: 30px; color: #ffffff;">{% blocktrans %}Call Us For Quote{% endblocktrans %}</h3>
+                    <p style=" color: #ffffff; text-align: left; margin-left: 35px;">{% blocktrans %}I'm just a text-based AI and I'm unable to make phone <br> calls. However, if you're looking to request a quote <br> from a specific business or service, you should find <br> their contact information on their website or in any <br> materials they've provided.{% endblocktrans %}</p>
+                    <h1  style="margin-top: 30px; color: #ffffff; font-size: 35px;">+91 1234567890</h1>
+                </div>
+            </div>
+    </div>
+    <div class="testimonial">
+        <p style="color: #00A3F7; text-align: center; margin-top: 100px;">{% blocktrans %}TESTIMONIAL{% endblocktrans %}</p>
+        <h1 style="text-align: center;">{% blocktrans %}What Our Clients Say About  <br>
+            Our Digital Services{% endblocktrans %}</h1>
+            <div style="display: flex; margin-left: 180px;" class="cards">
+                <div style="background: #EAF9FF; width: 384.1px; height: 321.52px; margin-right: 10px;" class="card1">
+                    <img style="width: 54.63px; height: 60px; object-fit: cover;margin: 50px 50px; " src="https://www.figma.com/file/CDoK9IWURbONoOUcwFx1eT/image/7bd3e31060e992a07444331ff7263b7c359d0688" alt="">
+                    <p style="color: #00A3F7; font-size: 18px; margin-left: 130px; margin-top: -100px;">Michael Anderson</p>
+                    <p style="margin-left: 130px; margin-top: -20px;">{% blocktrans %}Profession{% endblocktrans %}</p>
+                    <p style="font-size: 14px; margin-left: 25px; margin-top: 50px;">{% blocktrans %}The Information Technology (IT) field encompasses a <br> wide range of professions and career opportunities. <br> IT professionals work with technology systems and <br> software to design, develop, manage, and maintain  <br> various aspects of computing and information  systems.{% endblocktrans %}</p>
+                </div>
+                <div style="background: #FAFEFF; width: 384.1px; height: 321.52px; box-shadow: -8px 0 12px rgba(0, 0, 0, 0.1), 8px 0 12px rgba(0, 0, 0, 0.1);" class="card2">
+                    <img style="width: 54.63px; height: 60px; object-fit: cover;margin: 50px 50px; " src="https://www.figma.com/file/CDoK9IWURbONoOUcwFx1eT/image/66a4c09946c746b352a934551bba72420a57b3c8" alt="">
+                    <p style="color: #00A3F7; font-size: 18px; margin-left: 130px; margin-top: -100px;">Emily Davis</p>
+                    <p style="margin-left: 130px; margin-top: -20px;">{% blocktrans %}Business women{% endblocktrans %}</p>
+                    <p style="font-size: 14px; margin-left: 25px; margin-top: 50px;">{% blocktrans %}"Business women" refers to women who are actively <br> engaged in various aspects of the business world. <br> This can include women who are entrepreneurs, <br> business owners, corporate executives, managers, <br> professionals, or employees in various industries.{% endblocktrans %}</p>
+                </div>
+                <div style="background: #EAF9FF; width: 384.1px; height: 321.52px; margin-left: 10px;" class="card3">
+                    <img style="width: 54.63px; height: 60px; object-fit: cover;margin: 50px 50px; " src="https://www.figma.com/file/CDoK9IWURbONoOUcwFx1eT/image/5a67af0d2f172ef31ff5cbe13ec80ff50bc5a3be" alt="">
+                    <p style="color: #00A3F7; font-size: 18px; margin-left: 130px; margin-top: -100px;">James Wilson</p>
+                    <p style="margin-left: 130px; margin-top: -20px;">{% blocktrans %}Application Development{% endblocktrans %}</p>
+                    <p style="font-size: 14px; margin-left: 25px; margin-top: 50px;">{% blocktrans %}Application development refers to the process of <br> creating software applications for various platforms <br> and devices, such as mobile phones, desktop <br> computers, web browsers, and more.{% endblocktrans %}</p>
+                </div>
+            </div>
+    </div>
+    <div style="margin-left: 370px; margin-top: 150px;" class="logo">
+        <img style="width: 159.94px;" src="https://calldynamics.com.au/wp-content/uploads/2016/06/new-google-logo-png.png" alt="">
+        <img  style="width: 159.94px;" src="https://media.licdn.com/dms/image/D4D12AQHwi4jdRd3fQQ/article-cover_image-shrink_600_2000/0/1685279753620?e=2147483647&v=beta&t=7I-pJ0kDQfNl4w-0Ue8aPyol_X-aWOQlzp18NhTldys" alt="">
+        <img style="width: 159.94px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnt253Qlda-6a5x8LltLHZD4IWMCmk7LOQ9Q&s" alt="">
+        <img style="width: 89.94px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/IBM_logo.svg/800px-IBM_logo.svg.png" alt="">
+        <img style="width: 159.94px;" src="https://cdn.pixabay.com/photo/2013/01/29/22/53/yahoo-76684_960_720.png" alt="">
+        <img style="width: 59.94px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Dell_logo_2016.svg/800px-Dell_logo_2016.svg.png" alt=""> 
+    </div>
+    <div class="container-fluid bg-dark text-light mt-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="row gx-5">
+                <div class="col-lg-4 col-md-6 footer-about">
+                    <div class="d-flex flex-column align-items-center justify-content-center text-center h-100 bg-primary p-4">
+                        <a href="index.html" class="navbar-brand">
+                            <h1 class="m-0 text-white"><i class="fa fa-user-tie me-2"></i>{% blocktrans %}Startup{% endblocktrans %}</h1>
+                        </a>
+                        <p class="mt-3 mb-4">{% blocktrans %}Lorem diam sit erat dolor elitr et, diam lorem justo amet clita stet eos sit. Elitr dolor duo lorem, elitr clita ipsum sea. Diam amet erat lorem stet eos. Diam amet et kasd eos duo.{% endblocktrans %}</p>
+                        <form action="">
+                            <div class="input-group">
+                                <input type="text" class="form-control border-white p-3" placeholder="Your Email">
+                                <button class="btn btn-dark">{% blocktrans %}Sign Up{% endblocktrans %}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-6">
+                    <div class="row gx-5">
+                        <div class="col-lg-4 col-md-12 pt-5 mb-5">
+                            <div class="section-title section-title-sm position-relative pb-3 mb-4">
+                                <h3 class="text-light mb-0">{% blocktrans %}Get In Touch{% endblocktrans %}</h3>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <i class="fa fa-map-marker-alt text-primary me-2"></i>
+                                <p class="mb-0">123 Street, New York, USA</p>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <i class="fa fa-envelope-open text-primary me-2"></i>
+                                <p class="mb-0">info@example.com</p>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <i class="fa fa-phone text-primary me-2"></i>
+                                <p class="mb-0">+012 345 67890</p>
+                            </div>
+                            <div class="d-flex mt-4">
+                                <a class="btn btn-primary btn-square me-2" href="#"><i class="fab fa-twitter fw-normal"></i></a>
+                                <a class="btn btn-primary btn-square me-2" href="#"><i class="fab fa-facebook-f fw-normal"></i></a>
+                                <a class="btn btn-primary btn-square me-2" href="#"><i class="fab fa-linkedin-in fw-normal"></i></a>
+                                <a class="btn btn-primary btn-square" href="#"><i class="fab fa-instagram fw-normal"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12 pt-0 pt-lg-5 mb-5">
+                            <div class="section-title section-title-sm position-relative pb-3 mb-4">
+                                <h3 class="text-light mb-0">{% blocktrans %}Quick Links{% endblocktrans %}</h3>
+                            </div>
+                            <div class="link-animated d-flex flex-column justify-content-start">
+                                <a class="text-light mb-2" href="#"><i class="fa fa-arrow-right text-primary me-2"></i>{% blocktrans %}Home{% endblocktrans %}</a>
+                                <a class="text-light mb-2" href="#"><i class="fa fa-arrow-right text-primary me-2"></i>{% blocktrans %}About Us{% endblocktrans %}</a>
+                                <a class="text-light mb-2" href="#"><i class="fa fa-arrow-right text-primary me-2"></i>{% blocktrans %}Our Services{% endblocktrans %}</a>
+                                <a class="text-light mb-2" href="#"><i class="fa fa-arrow-right text-primary me-2"></i>{% blocktrans %}Meet The Team{% endblocktrans %}</a>
+                                <a class="text-light mb-2" href="#"><i class="fa fa-arrow-right text-primary me-2"></i>{% blocktrans %}Latest Blog{% endblocktrans %}</a>
+                                <a class="text-light" href="#"><i class="fa fa-arrow-right text-primary me-2"></i>{% blocktrans %}Contact Us{% endblocktrans %}</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12 pt-0 pt-lg-5 mb-5">
+                            <div class="section-title section-title-sm position-relative pb-3 mb-4">
+                                <h3 class="text-light mb-0">{% blocktrans %}Popular Links{% endblocktrans %}</h3>
+                            </div>
+                            <div class="link-animated d-flex flex-column justify-content-start">
+                                <a class="text-light mb-2" href="#"><i class="fa fa-arrow-right text-primary me-2"></i>{% blocktrans %}Home{% endblocktrans %}</a>
+                                <a class="text-light mb-2" href="#"><i class="fa fa-arrow-right text-primary me-2"></i>{% blocktrans %}About Us{% endblocktrans %}</a>
+                                <a class="text-light mb-2" href="#"><i class="fa fa-arrow-right text-primary me-2"></i>{% blocktrans %}Our Services{% endblocktrans %}</a>
+                                <a class="text-light mb-2" href="#"><i class="fa fa-arrow-right text-primary me-2"></i>{% blocktrans %}Meet The Team{% endblocktrans %}</a>
+                                <a class="text-light mb-2" href="#"><i class="fa fa-arrow-right text-primary me-2"></i>{% blocktrans %}Latest Blog{% endblocktrans %}</a>
+                                <a class="text-light" href="#"><i class="fa fa-arrow-right text-primary me-2"></i>{% blocktrans %}Contact Us{% endblocktrans %}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</html>
